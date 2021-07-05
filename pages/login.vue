@@ -26,12 +26,12 @@ export default {
     },
     methods:{
         login(){
-            if(!this.email || !this.passwrod) {
+            if(!this.email || !this.password) {
                 alert('メールアドレスまたはパスワードが入力されていません。')
                 return 
             }
-            firebase.auth().singInWithEmailAndPassword(this.email,this.password)
-            then(() =>{
+            firebase.auth().signInWithEmailAndPassword(this.email,this.password)
+            .then(() =>{
                 alert('ログインが完了しました')
                 this.$router.push('/')
             })

@@ -11,7 +11,7 @@ import firebase from '/plugins/firebase'
 export default {
     methods:{
         logout(){
-            firebase.auth().singOut().then(() =>{
+            firebase.auth().signOut().then(() =>{
                 alert('ログアウトが完了しました')
                 this.$router.replace('/')
             })
