@@ -6,7 +6,7 @@
     <br> 
     <NuxtLink to="/login">ログイン</NuxtLink>
     <br>
-    <NuxtLink to="logoug">ログアウト</NuxtLink>
+    <NuxtLink to="/logout">ログアウト</NuxtLink>
   </div>
 </template>
 
