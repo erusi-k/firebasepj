@@ -1,0 +1,60 @@
+<template>
+    <div class="login">
+        <label>
+            メールアドレス:<input type="email" v-model="email" required/>
+        </label>
+        <br>
+        <label>
+            パスワード:<input type="password" v-model="password" required/>
+        </label>
+        <br>
+        <button @click="login">ログイン</button>
+        <br>
+        <NuxtLink to ="/">戻る</NuxtLink>
+    </div>
+</template>
+
+
+<script>
+import firebase from '~/plugins/firebase'
+export default {
+    data(){
+        return{
+            email:null,
+            passwrod:null,
+        }
+    },
+    methods:{
+        login(){
+            if(!this.email || !this.passwrod) {
+                alert('メールアドレスまたはパスワードが入力されていません。')
+                return 
+            }
+            firebase.auth().singInWithEmailAndPassword(this.email,this.password)
+            then(() =>{
+                alert('ログインが完了しました')
+                this.$router.push('/')
+            })
+            .catch((error) => {
+                switch(error.code){
+                    case 'auth/invalid-email':
+                        alert('メールアドレスの形式が違います')
+                        break
+                    case 'auth/user-disabled':
+                        alert('ユーザーが無効になっております')
+                        break
+                    case 'auth/user-not-found':
+                        alert('ユーザーが存在しません')
+                        break
+                    case 'auth/wrong-password':
+                        alert('パスワードが間違っております')
+                        break
+                    default:
+                        alert('エラがー起きました。しばらくしてから再度お試しください')
+                        break                
+                }
+            })
+        }
+    }
+}
+</script>
